@@ -3,300 +3,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoviaTrip - Your Gateway to Endless Journey</title>
+    <title>NoviaTrip - Pesan Tiket Pesawat, Hotel & Transportasi</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Inter & Google Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Plus Jakarta Sans & Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); }
+        .bg-hero {
+            background-image: linear-gradient(180deg, rgba(3, 105, 161, 0.6) 0%, rgba(15, 23, 42, 0.85) 100%), 
+                              url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
 
-    <!-- Header Navbar -->
-    <header class="bg-slate-800/80 backdrop-blur border-b border-slate-700/60 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                    <span class="material-symbols-outlined text-white text-2xl">flight_takeoff</span>
+    <!-- Navbar Ala Traveloka -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="material-symbols-outlined text-2xl">connecting_airports</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-700 bg-clip-text text-transparent">NoviaTrip</span>
+                        <span class="hidden sm:inline-block text-[10px] bg-sky-100 text-sky-700 font-semibold px-2 py-0.5 rounded-full ml-1 border border-sky-200">Official Partner</span>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">NoviaTrip</h1>
-                    <p class="text-xs text-slate-400">Your Gateway to Endless Journey</p>
+
+                <!-- Right Menu & Developer Control Panel Switcher -->
+                <div class="flex items-center gap-3">
+                    <button onclick="togglePointerDisplay()" id="pointerToggleBtn" class="text-xs font-semibold px-3 py-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 transition flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base text-sky-600">memory</span> 
+                        <span>Pointer Inspector: <strong id="pointerStatus">OFF</strong></span>
+                    </button>
+                    <button onclick="bukaAdminModal()" class="text-xs font-semibold px-3.5 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white shadow-sm transition flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">terminal</span> Log Dev (Admin)
+                    </button>
                 </div>
             </div>
-            <span class="text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span> Engine C++ & Pointer Active
-            </span>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-6 space-y-6">
+    <!-- Hero Banner & Traveloka-Style Search Engine -->
+    <section class="bg-hero py-12 px-4 sm:px-6 lg:px-8 text-white relative">
+        <div class="max-w-5xl mx-auto space-y-6">
+            <div class="text-center space-y-2">
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Eksplorasi Dunia Tanpa Batas Bersama NoviaTrip</h1>
+                <p class="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto">Pesan Tiket Pesawat, Hotel, Kereta Api, dan Bus Terlengkap dengan Harga Terbaik</p>
+            </div>
 
-        <!-- Banner Info Konsep -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl backdrop-blur">
-                <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">0. Struct</span>
-                <p class="text-sm font-semibold text-blue-400 mt-1">struct Tiket { ... }</p>
-            </div>
-            <div class="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl backdrop-blur">
-                <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">0. Array & Pointer</span>
-                <p class="text-sm font-semibold text-cyan-400 mt-1">Tiket db[MAX] & Tiket* ptr</p>
-            </div>
-            <div class="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl backdrop-blur">
-                <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">1. Sorting</span>
-                <p class="text-sm font-semibold text-emerald-400 mt-1">Bubble Sort Pointer</p>
-            </div>
-            <div class="bg-slate-800/60 border border-slate-700/50 p-4 rounded-2xl backdrop-blur">
-                <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">2. Searching</span>
-                <p class="text-sm font-semibold text-amber-400 mt-1">Linear Search Traversal</p>
+            <!-- Service Category Tabs -->
+            <div class="glass-card rounded-2xl p-4 sm:p-6 text-slate-800 shadow-2xl border border-white/40">
+                <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto pb-3 mb-4 border-b border-slate-200/80" id="categoryTabs">
+                    <button onclick="switchCategory('PESAWAT')" id="tab-PESAWAT" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-sky-600 text-white shadow-sm transition">
+                        <span class="material-symbols-outlined text-xl">flight</span> Tiket Pesawat
+                    </button>
+                    <button onclick="switchCategory('HOTEL')" id="tab-HOTEL" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <span class="material-symbols-outlined text-xl">hotel</span> Hotel & Menginap
+                    </button>
+                    <button onclick="switchCategory('KERETA')" id="tab-KERETA" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <span class="material-symbols-outlined text-xl">directions_railway</span> Kereta Api
+                    </button>
+                    <button onclick="switchCategory('BUS')" id="tab-BUS" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                        <span class="material-symbols-outlined text-xl">directions_bus</span> Bus & Travel
+                    </button>
+                </div>
+
+                <!-- Live Filter & Linear Search Bar -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div class="md:col-span-2 relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-3 text-slate-400">search</span>
+                        <input type="text" id="searchInput" placeholder="Cari rute, kota tujuan, maskapai, atau hotel..." 
+                               class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition">
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="runSearch()" class="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-sm px-4 py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-lg">search</span> Cari
+                        </button>
+                        <button onclick="resetData()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-sm px-3.5 py-2.5 rounded-xl transition">
+                            Reset
+                        </button>
+                    </div>
+                    <!-- Bubble Sort Price Selector -->
+                    <div class="flex gap-2">
+                        <button onclick="runSort(true)" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 font-semibold text-xs px-2 py-2.5 rounded-xl transition flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-sm">south</span> Termurah
+                        </button>
+                        <button onclick="runSort(false)" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 font-semibold text-xs px-2 py-2.5 rounded-xl transition flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-sm">north</span> Termahal
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Filter & Control Panel -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            <!-- Searching Box -->
-            <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl space-y-3">
-                <label class="text-sm font-medium text-slate-300 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-blue-400 text-lg">search</span> Cari Tiket Penerbangan (Linear Search)
-                </label>
-                <div class="flex gap-2">
-                    <input type="text" id="searchInput" placeholder="Cari maskapai / tujuan (Garuda, Lion, Bali...)" 
-                           class="w-full bg-slate-900 border border-slate-700/80 px-4 py-2.5 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition">
-                    <button onclick="runSearch()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition shadow-lg shadow-blue-600/20 flex items-center gap-1">
-                        Cari
-                    </button>
-                    <button onclick="resetView()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-sm font-medium px-4 py-2.5 rounded-xl transition">
-                        Reset
-                    </button>
-                </div>
+    <!-- Content Listing Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+        
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2" id="listingTitle">
+                    <span class="material-symbols-outlined text-sky-600">flight_takeoff</span> Rekomendasi Tiket Pesawat
+                </h2>
+                <p class="text-xs text-slate-500 mt-0.5">Hasil pencarian real-time berdasarkan kriteria kamu</p>
             </div>
-
-            <!-- Sorting Box -->
-            <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl space-y-3">
-                <label class="text-sm font-medium text-slate-300 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-emerald-400 text-lg">swap_vert</span> Urutkan Harga Tiket (Bubble Sort Pointer)
-                </label>
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="runSort(true)" class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-sm font-medium py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-1">
-                        <span class="material-symbols-outlined text-base">arrow_upward</span> Termurah (Asc)
-                    </button>
-                    <button onclick="runSort(false)" class="bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 border border-amber-500/30 text-sm font-medium py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-1">
-                        <span class="material-symbols-outlined text-base">arrow_downward</span> Termahal (Desc)
-                    </button>
-                </div>
-            </div>
-
+            <span id="dataCountBadge" class="text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200 px-3 py-1 rounded-full">
+                Menampilkan 0 Pilihan
+            </span>
         </div>
 
-        <!-- Table & Console Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- Table View -->
-            <div class="lg:col-span-2 bg-slate-800/40 border border-slate-700/50 rounded-2xl p-5 space-y-4">
-                <div class="flex justify-between items-center">
-                    <h2 class="font-semibold text-slate-200 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-cyan-400">confirmation_number</span> Daftar Tiket Tersedia
-                    </h2>
-                    <span id="dataCount" class="text-xs font-mono bg-slate-700/50 text-slate-400 px-2.5 py-1 rounded-md">Total: 10 Tiket</span>
-                </div>
-                
-                <div class="overflow-x-auto rounded-xl border border-slate-700/50">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-800/90 text-slate-400 text-xs uppercase font-semibold border-b border-slate-700/50">
-                            <tr>
-                                <th class="p-3.5">ID</th>
-                                <th class="p-3.5">Maskapai</th>
-                                <th class="p-3.5">Rute Tujuan</th>
-                                <th class="p-3.5">Jam</th>
-                                <th class="p-3.5">Harga</th>
-                                <th class="p-3.5 font-mono text-purple-400">Memory Addr (Pointer)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ticketTable" class="divide-y divide-slate-700/40 bg-slate-900/30">
-                            <!-- Render via JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Console Log Window -->
-            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col h-[460px] font-mono text-xs">
-                <div class="flex justify-between items-center pb-3 border-b border-slate-800 mb-2">
-                    <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> LOG PROSES ALGORITMA
-                    </span>
-                    <button onclick="clearLog()" class="text-slate-500 hover:text-slate-300 transition">Clear</button>
-                </div>
-                <div id="logArea" class="flex-1 overflow-y-auto space-y-1.5 text-slate-400 pr-1 leading-relaxed">
-                    <p class="text-slate-600">// Log langkah kerja Sorting & Searching akan tampil di sini...</p>
-                </div>
-            </div>
-
+        <!-- Dynamic Card Grid Output -->
+        <div id="cardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JavaScript rendered dynamic items here -->
         </div>
 
     </main>
 
-    <!-- JS Logic (Struct, Pointer, Array, Sort, Search) -->
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-1">
+            <p class="text-slate-300 font-semibold">&copy; 2026 NoviaTrip Traveluka Style Project. All rights reserved.</p>
+            <p class="text-slate-500">Dikembangkan untuk Praktikum Struktur Data — Pendidikan Teknologi Informasi</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: Admin Log Console (Dev Mode) -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col h-[520px]">
+            <div class="bg-slate-900 px-5 py-3 border-b border-slate-800 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-emerald-400 font-mono text-xs font-bold">CONSOLE LOG PROSES ALGORITMA (C++ ENGINE)</span>
+                </div>
+                <button onclick="tutupAdminModal()" class="text-slate-400 hover:text-white font-bold text-lg">&times;</button>
+            </div>
+            <div id="adminLogArea" class="p-4 flex-1 overflow-y-auto font-mono text-xs text-slate-300 space-y-1 bg-slate-950">
+                <p class="text-slate-600">// Log langkah kerja Bubble Sort & Linear Search Pointer akan dicetak di sini...</p>
+            </div>
+            <div class="p-3 bg-slate-900 border-t border-slate-800 flex justify-between items-center">
+                <span class="text-[11px] text-slate-500">Struct • Array • Pointer • Bubble Sort • Linear Search</span>
+                <button onclick="clearAdminLog()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition">Bersihkan Log</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Modal Detail & Pemesanan Ringkas (Interactive Booking Modal - CLEAN USER VIEW) -->
+    <div id="pilihModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-sky-600 to-blue-700 p-5 text-white flex justify-between items-start">
+                <div>
+                    <span id="modalKategoriBadge" class="text-[10px] bg-white/20 text-white font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">PESAWAT</span>
+                    <h3 id="modalNamaLayanan" class="text-xl font-extrabold mt-1">Garuda Indonesia</h3>
+                    <p id="modalKodeLayanan" class="text-xs text-sky-100 font-mono mt-0.5">Kode: GA-401</p>
+                </div>
+                <button onclick="tutupPilihModal()" class="text-white/80 hover:text-white font-bold text-2xl leading-none">&times;</button>
+            </div>
+
+            <!-- Modal Body Detail (Clean Traveloka Style without Pointer Address) -->
+            <div class="p-6 space-y-4">
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-3 text-xs">
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-200">
+                        <span class="text-slate-500 font-medium">Rute / Lokasi</span>
+                        <span id="modalRute" class="font-bold text-slate-800 text-right">Jakarta (CGK) ➔ Bali (DPS)</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-200">
+                        <span class="text-slate-500 font-medium">Jadwal / Durasi</span>
+                        <span id="modalJam" class="font-semibold text-slate-700">08:00 WIB</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-1">
+                        <span class="text-slate-500 font-medium">Fasilitas / Kelas</span>
+                        <span id="modalFasilitas" class="font-semibold text-slate-700">Bagasi 20kg, Makanan, Recline Seat</span>
+                    </div>
+                </div>
+
+                <!-- Price & Checkout -->
+                <div class="flex items-center justify-between pt-2">
+                    <div>
+                        <span class="text-xs text-slate-400 block">Total Pembayaran</span>
+                        <span id="modalHarga" class="text-2xl font-extrabold text-orange-600">Rp 1.450.000</span>
+                    </div>
+                    <button onclick="konfirmasiPesanan()" class="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-orange-500/20 transition flex items-center gap-1.5 text-sm">
+                        <span class="material-symbols-outlined text-lg">check_circle</span> Konfirmasi Pesanan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE JAVASCRIPT: STRUCT, ARRAY, POINTER, BUBBLE SORT & LINEAR SEARCH -->
     <script>
-        // STRUCT Tiket
-        class Tiket {
-            constructor(id, maskapai, rute, harga, jam, memoryAddress) {
+        // 0. STRUCT LAYANAN TRAVEL (Representasi C++)
+        class LayananTravel {
+            constructor(id, kategori, provider, kode, rute, jam, harga, rating, gambar, pointerAddr) {
                 this.id = id;
-                this.maskapai = maskapai;
+                this.kategori = kategori; // PESAWAT, HOTEL, KERETA, BUS
+                this.provider = provider;
+                this.kode = kode;
                 this.rute = rute;
-                this.harga = harga;
                 this.jam = jam;
-                this.memoryAddress = memoryAddress;
+                this.harga = harga; // Numeric untuk sorting
+                this.rating = rating;
+                this.gambar = gambar;
+                this.pointerAddr = pointerAddr; // Visualisasi Pointer Memory
             }
         }
 
-        // ARRAY OF STRUCT (Database Master 10 Data)
-        const databaseAwal = [
-            new Tiket("TK01", "Garuda Indonesia", "Jakarta (CGK) -> Bali (DPS)", 1450000, "08:00", "0x7fff5fbff010"),
-            new Tiket("TK02", "Lion Air", "Surabaya (SUB) -> Jakarta (CGK)", 750000, "10:30", "0x7fff5fbff048"),
-            new Tiket("TK03", "AirAsia", "Jakarta (CGK) -> Singapura (SIN)", 980000, "13:15", "0x7fff5fbff080"),
-            new Tiket("TK04", "Batik Air", "Bali (DPS) -> Yogyakarta (YIA)", 1100000, "15:45", "0x7fff5fbff0b8"),
-            new Tiket("TK05", "Citilink", "Surabaya (SUB) -> Makassar (UPG)", 890000, "18:20", "0x7fff5fbff0f0"),
-            new Tiket("TK06", "Lion Air", "Jakarta (CGK) -> Bali (DPS)", 820000, "06:15", "0x7fff5fbff128"),
-            new Tiket("TK07", "Garuda Indonesia", "Surabaya (SUB) -> Jakarta (CGK)", 1350000, "14:00", "0x7fff5fbff160"),
-            new Tiket("TK08", "AirAsia", "Surabaya (SUB) -> Bali (DPS)", 650000, "09:45", "0x7fff5fbff198"),
-            new Tiket("TK09", "Batik Air", "Jakarta (CGK) -> Surabaya (SUB)", 950000, "17:30", "0x7fff5fbff1d0"),
-            new Tiket("TK10", "Lion Air", "Bali (DPS) -> Surabaya (SUB)", 710000, "19:50", "0x7fff5fbff208")
+        // 1. ARRAY OF STRUCT (Database Master)
+        const databaseMaster = [
+            // PESAWAT
+            new LayananTravel(1, "PESAWAT", "Garuda Indonesia", "GA-401", "Jakarta (CGK) ➔ Bali (DPS)", "08:00 - 10:50", 1450000, 4.8, "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff010"),
+            new LayananTravel(2, "PESAWAT", "Lion Air", "JT-610", "Surabaya (SUB) ➔ Jakarta (CGK)", "10:30 - 12:00", 750000, 4.2, "https://images.unsplash.com/photo-1520437358207-323b43b50729?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff048"),
+            new LayananTravel(3, "PESAWAT", "AirAsia", "QZ-522", "Jakarta (CGK) ➔ Singapura (SIN)", "13:15 - 16:00", 980000, 4.5, "https://images.unsplash.com/photo-1512353087810-25dfcd100962?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff080"),
+            new LayananTravel(4, "PESAWAT", "Batik Air", "ID-6512", "Bali (DPS) ➔ Yogyakarta (YIA)", "15:45 - 17:00", 1100000, 4.6, "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff0b8"),
+            new LayananTravel(5, "PESAWAT", "Citilink", "QG-830", "Surabaya (SUB) ➔ Makassar (UPG)", "18:20 - 20:50", 890000, 4.4, "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff0f0"),
+
+            // HOTEL
+            new LayananTravel(6, "HOTEL", "The Mulia Resort & Spa", "HTL-BALI01", "Kuta, Bali", "Check-in 14:00", 2850000, 4.9, "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff128"),
+            new LayananTravel(7, "HOTEL", "Hotel Indonesia Kempinski", "HTL-JKT01", "MH Thamrin, Jakarta", "Check-in 14:00", 2100000, 4.8, "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff160"),
+            new LayananTravel(8, "HOTEL", "Grand Mercure Mirama", "HTL-SBY01", "Darmo, Surabaya", "Check-in 14:00", 950000, 4.6, "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff198"),
+
+            // KERETA API
+            new LayananTravel(9, "KERETA", "Argo Bromo Anggrek", "KA-01", "Surabaya Pasarturi ➔ Gambir Jakarta", "09:05 - 17:15", 680000, 4.8, "https://images.unsplash.com/photo-1532105956626-9569c03602f6?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff1d0"),
+            new LayananTravel(10, "KERETA", "Taksaka Eksekutif", "KA-68", "Yogyakarta (YK) ➔ Gambir Jakarta", "08:45 - 15:09", 540000, 4.7, "https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff208"),
+
+            // BUS & TRAVEL
+            new LayananTravel(11, "BUS", "Sinar Jaya Executive", "BUS-SJ01", "Jakarta ➔ Semarang", "19:00 - 03:00", 210000, 4.5, "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff240"),
+            new LayananTravel(12, "BUS", "PO Haryanto Double Decker", "BUS-HR99", "Jakarta ➔ Solo", "20:00 - 04:30", 280000, 4.7, "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=600&auto=format&fit=crop", "0x7fff5fbff278")
         ];
 
-        let dataAktif = [...databaseAwal];
+        // State Aktif
+        let currentKategori = "PESAWAT";
+        let displayData = [];
+        let showPointerInspector = false;
+        let selectedItemForModal = null;
 
-        function addLog(msg, type = "normal") {
-            const logArea = document.getElementById("logArea");
+        // Logging Function
+        function writeAdminLog(msg, tag = "INFO") {
+            const area = document.getElementById("adminLogArea");
             const p = document.createElement("p");
-            
-            if (type === "header") p.className = "text-yellow-400 font-bold mt-2";
-            else if (type === "success") p.className = "text-emerald-400 font-semibold mt-1";
-            else if (type === "swap") p.className = "text-cyan-300 pl-2";
-            else if (type === "match") p.className = "text-pink-400 font-semibold pl-2";
-            else p.className = "text-slate-300 pl-2";
+            let color = "text-slate-300";
+            if (tag === "SWAP") color = "text-cyan-400 font-semibold";
+            if (tag === "MATCH") color = "text-emerald-400 font-semibold";
+            if (tag === "HEAD") color = "text-amber-400 font-bold mt-2";
 
-            p.innerText = msg;
-            logArea.appendChild(p);
-            logArea.scrollTop = logArea.scrollHeight;
+            p.className = color;
+            p.innerText = `[${tag}] ${msg}`;
+            area.appendChild(p);
+            area.scrollTop = area.scrollHeight;
         }
 
-        function clearLog() {
-            document.getElementById("logArea").innerHTML = '<p class="text-slate-600">// Log dibersihkan.</p>';
+        function clearAdminLog() {
+            document.getElementById("adminLogArea").innerHTML = '<p class="text-slate-600">// Log dibersihkan.</p>';
         }
 
-        function renderTable(data) {
-            const tbody = document.getElementById("ticketTable");
-            tbody.innerHTML = "";
+        // Toggle Pointer Inspector
+        function togglePointerDisplay() {
+            showPointerInspector = !showPointerInspector;
+            document.getElementById("pointerStatus").innerText = showPointerInspector ? "ON" : "OFF";
+            document.getElementById("pointerToggleBtn").className = showPointerInspector 
+                ? "text-xs font-semibold px-3 py-2 rounded-lg bg-purple-600 text-white shadow-sm transition flex items-center gap-1.5"
+                : "text-xs font-semibold px-3 py-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 transition flex items-center gap-1.5";
+            renderCards(displayData);
+        }
 
-            if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500">Tiket tidak ditemukan. Klik tombol 'Reset' untuk menampilkan ulang data.</td></tr>`;
-                document.getElementById("dataCount").innerText = `Total: 0 Tiket`;
-                return;
-            }
-
-            data.forEach(item => {
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-800/50 transition border-b border-slate-800/40";
-                tr.innerHTML = `
-                    <td class="p-3.5 font-mono text-xs text-slate-400">${item.id}</td>
-                    <td class="p-3.5 font-medium text-slate-200">${item.maskapai}</td>
-                    <td class="p-3.5 text-slate-300">${item.rute}</td>
-                    <td class="p-3.5 text-slate-400">${item.jam}</td>
-                    <td class="p-3.5 font-bold text-cyan-400">Rp ${item.harga.toLocaleString('id-ID')}</td>
-                    <td class="p-3.5 font-mono text-xs text-purple-400 bg-purple-500/5 rounded">${item.memoryAddress}</td>
-                `;
-                tbody.appendChild(tr);
+        // Switch Category Tabs
+        function switchCategory(kat) {
+            currentKategori = kat;
+            const tabs = ["PESAWAT", "HOTEL", "KERETA", "BUS"];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === kat) {
+                    btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-sky-600 text-white shadow-sm transition";
+                } else {
+                    btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition";
+                }
             });
 
-            document.getElementById("dataCount").innerText = `Total: ${data.length} Tiket`;
+            // Filter data kategori
+            displayData = databaseMaster.filter(item => item.kategori === kat);
+            
+            // Update Title
+            const titles = {
+                "PESAWAT": "Rekomendasi Tiket Pesawat",
+                "HOTEL": "Hotel & Pilihan Menginap Populer",
+                "KERETA": "Jadwal Kereta Api Eksekutif",
+                "BUS": "Bus & Shuttle Intercity"
+            };
+            document.getElementById("listingTitle").innerHTML = `<span class="material-symbols-outlined text-sky-600">travel_explore</span> ${titles[kat]}`;
+
+            renderCards(displayData);
         }
 
-        // BUBBLE SORT WITH POINTER (Mengurutkan Data Yang Sedang Tampil)
+        // 2. BUBBLE SORT IMPLEMENTATION (Menggunakan Pointer Array Referensi)
         function runSort(ascending = true) {
-            clearLog();
-            const modeText = ascending ? "ASCENDING (Termurah)" : "DESCENDING (Termahal)";
-            addLog(`=== BUBBLE SORT POINTER (${modeText}) ===`, "header");
-
-            let arr = dataAktif; 
+            writeAdminLog(`=== BUBBLE SORT POINTER (${ascending ? "ASCENDING / TERMURAH" : "DESCENDING / TERMAHAL"}) ===`, "HEAD");
+            let arr = displayData;
             let n = arr.length;
 
-            if (n <= 1) {
-                addLog(`Jumlah data <= 1, tidak memerlukan proses pengurutan.`, "success");
-                return;
-            }
-
-            let step = 1;
             for (let i = 0; i < n - 1; i++) {
-                addLog(`\n[Pass ${i + 1}] Memulai iterasi ke-${i + 1}`, "header");
                 for (let j = 0; j < n - i - 1; j++) {
+                    // Konsep Pointer
                     let ptrA = arr[j];
                     let ptrB = arr[j + 1];
 
-                    let cond = ascending ? (ptrA.harga > ptrB.harga) : (ptrA.harga < ptrB.harga);
+                    let condition = ascending ? (ptrA.harga > ptrB.harga) : (ptrA.harga < ptrB.harga);
 
-                    if (cond) {
-                        addLog(`Step ${step++}: SWAP (*ptrA: Rp${ptrA.harga.toLocaleString()}) ↔ (*ptrB: Rp${ptrB.harga.toLocaleString()})`, "swap");
-                        addLog(`   Tukar Alamat Memori: ${ptrA.memoryAddress} <-> ${ptrB.memoryAddress}`, "swap");
-                        
+                    if (condition) {
+                        writeAdminLog(`SWAP Pointer: ${ptrA.provider} (Rp${ptrA.harga.toLocaleString()}) ↔ ${ptrB.provider} (Rp${ptrB.harga.toLocaleString()}) [${ptrA.pointerAddr} <-> ${ptrB.pointerAddr}]`, "SWAP");
                         let temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
-                    } else {
-                        addLog(`Step ${step++}: PASS (Rp${ptrA.harga.toLocaleString()} sudah sesuai dibanding Rp${ptrB.harga.toLocaleString()})`);
                     }
                 }
             }
-
-            addLog(`\n[RESULT] Process Sorting Selesai!`, "success");
-            dataAktif = arr;
-            renderTable(dataAktif);
+            displayData = arr;
+            renderCards(displayData);
         }
 
-        // LINEAR SEARCH TRAVERSAL (Mencari di Database Master)
+        // 3. LINEAR SEARCH IMPLEMENTATION (Traversal Pointer)
         function runSearch() {
             const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
             if (!keyword) {
-                alert("Ketikkan nama maskapai atau kota tujuan untuk mencari!");
+                alert("Silakan ketik kata kunci pencarian!");
                 return;
             }
 
-            clearLog();
-            addLog(`=== LINEAR SEARCH TRAVERSAL ===`, "header");
-            addLog(`Kata kunci pencarian: "${keyword}"`, "normal");
-
+            writeAdminLog(`=== LINEAR SEARCH TRAVERSAL (Keyword: "${keyword}") ===`, "HEAD");
             let hasil = [];
-            for (let i = 0; i < databaseAwal.length; i++) {
-                let ptrCurrent = databaseAwal[i];
-                addLog(`[Check Index ${i}] Alamat Memori: ${ptrCurrent.memoryAddress} | Maskapai: "${ptrCurrent.maskapai}"`);
 
-                let isMaskapaiMatch = ptrCurrent.maskapai.toLowerCase().includes(keyword);
-                let isRuteMatch = ptrCurrent.rute.toLowerCase().includes(keyword);
+            for (let i = 0; i < databaseMaster.length; i++) {
+                let ptrCurrent = databaseMaster[i];
+                writeAdminLog(`Traverse Index [${i}] Addr: ${ptrCurrent.pointerAddr} | Item: ${ptrCurrent.provider} - ${ptrCurrent.rute}`);
 
-                if (isMaskapaiMatch || isRuteMatch) {
-                    addLog(`  └─ 🎯 MATCH! Data ditemukan pada pointer ${ptrCurrent.memoryAddress}`, "match");
+                let isMatch = ptrCurrent.provider.toLowerCase().includes(keyword) || 
+                              ptrCurrent.rute.toLowerCase().includes(keyword) ||
+                              ptrCurrent.kode.toLowerCase().includes(keyword);
+
+                if (isMatch) {
+                    writeAdminLog(`🎯 MATCH FOUND at Pointer Address: ${ptrCurrent.pointerAddr}`, "MATCH");
                     hasil.push(ptrCurrent);
                 }
             }
 
-            addLog(`\n[RESULT] Pencarian selesai. Ditemukan ${hasil.length} tiket.`, "success");
-            dataAktif = hasil;
-            renderTable(hasil);
+            displayData = hasil;
+            document.getElementById("listingTitle").innerHTML = `<span class="material-symbols-outlined text-sky-600">search</span> Hasil Pencarian: "${keyword}"`;
+            renderCards(displayData);
         }
 
-        function resetView() {
-            dataAktif = [...databaseAwal];
+        function resetData() {
             document.getElementById("searchInput").value = "";
-            clearLog();
-            addLog("Tampilan dan data berhasil di-reset ke kondisi awal.", "success");
-            renderTable(dataAktif);
+            clearAdminLog();
+            switchCategory(currentKategori);
         }
 
-        renderTable(dataAktif);
+        // Render Kartu Tampilan Modern
+        function renderCards(data) {
+            const container = document.getElementById("cardContainer");
+            container.innerHTML = "";
+
+            document.getElementById("dataCountBadge").innerText = `Menampilkan ${data.length} Pilihan`;
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-200">
+                        <span class="material-symbols-outlined text-4xl text-slate-300">search_off</span>
+                        <p class="text-slate-500 font-medium mt-2">Tidak ditemukan layanan yang sesuai pencarian kamu.</p>
+                        <button onclick="resetData()" class="mt-3 text-xs text-sky-600 font-bold hover:underline">Kembalikan Semua Data</button>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- Image & Badge -->
+                        <div class="relative h-44 overflow-hidden bg-slate-100">
+                            <img src="${item.gambar}" alt="${item.provider}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute top-3 left-3 bg-slate-900/70 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-lg">
+                                ${item.kode}
+                            </div>
+                            <div class="absolute top-3 right-3 bg-amber-400 text-slate-900 font-bold text-xs px-2 py-0.5 rounded-md flex items-center gap-0.5 shadow-sm">
+                                <span class="material-symbols-outlined text-sm">star</span> ${item.rating}
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-4 space-y-2">
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-bold text-slate-800 text-base group-hover:text-sky-600 transition">${item.provider}</h3>
+                                <span class="text-[10px] bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded">${item.kategori}</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm text-slate-400">location_on</span> ${item.rute}
+                            </p>
+                            <p class="text-xs text-slate-500 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm text-slate-400">schedule</span> ${item.jam}
+                            </p>
+                            
+                            ${showPointerInspector ? `
+                                <div class="mt-2 pt-2 border-t border-purple-100 font-mono text-[11px] text-purple-700 bg-purple-50 p-2 rounded-lg flex items-center justify-between">
+                                    <span>Pointer Address:</span>
+                                    <strong class="font-bold">${item.pointerAddr}</strong>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Card Footer -->
+                    <div class="px-4 pb-4 pt-2 border-t border-slate-100 flex items-center justify-between mt-2">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Mulai Dari</span>
+                            <span class="text-lg font-extrabold text-orange-600">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                        </div>
+                        <button onclick="bukaPilihModal(${item.id})" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition">
+                            Pilih
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Buka Modal Pemesanan Interaktif
+        function bukaPilihModal(id) {
+            const item = databaseMaster.find(x => x.id === id);
+            if (!item) return;
+
+            selectedItemForModal = item;
+            document.getElementById("modalKategoriBadge").innerText = item.kategori;
+            document.getElementById("modalNamaLayanan").innerText = item.provider;
+            document.getElementById("modalKodeLayanan").innerText = `Kode ID: ${item.kode}`;
+            document.getElementById("modalRute").innerText = item.rute;
+            document.getElementById("modalJam").innerText = item.jam;
+            document.getElementById("modalHarga").innerText = `Rp ${item.harga.toLocaleString('id-ID')}`;
+
+            document.getElementById("pilihModal").classList.remove("hidden");
+        }
+
+        function tutupPilihModal() {
+            document.getElementById("pilihModal").classList.add("hidden");
+        }
+
+        function konfirmasiPesanan() {
+            if (!selectedItemForModal) return;
+            alert(`🎉 Pemesanan Berhasil!\n\nTerima kasih telah memesan ${selectedItemForModal.provider} (${selectedItemForModal.kode}) di NoviaTrip!\n\nDetail e-tiket telah dikirimkan ke email kamu.`);
+            tutupPilihModal();
+        }
+
+        // Modal Admin Toggle
+        function bukaAdminModal() {
+            document.getElementById("adminModal").classList.remove("hidden");
+        }
+        function tutupAdminModal() {
+            document.getElementById("adminModal").classList.add("hidden");
+        }
+
+        // Initialize First View
+        switchCategory("PESAWAT");
     </script>
 </body>
 </html>
